@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-function App() {
+import NavbarComponent from "./components/Navbar";
+import Hero from "./components/Hero";
+import Projects from "./components/Projects";
+import ScriptPage from "./components/ScriptBashPage"; // page pour le script Bash
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <NavbarComponent />
+      <Routes>
+        {/* Page d'accueil avec Hero + Projects */}
+        <Route
+          path="/"
+          element={
+            <>
+              <Hero />
+              <Projects />
+            </>
+          }
+        />
+        {/* Page spécifique pour le Script Bash */}
+        <Route path="/script" element={<ScriptPage />} />
+      </Routes>
+      {/* <Contact/> */}
+    </Router>
   );
-}
+};
 
 export default App;
