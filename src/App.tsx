@@ -5,7 +5,9 @@ import NavbarComponent from "./components/Navbar";
 import Hero from "./components/Hero";
 import Projects from "./components/Projects";
 import ScriptPage from "./components/ScriptBashPage"; // page pour le script Bash
-
+import Contact from "./components/Contact";
+import ProjectDétails from "./components/ProjectDetail";
+import AdminMessages from "./components/Admin";
 const App: React.FC = () => {
   return (
     <Router>
@@ -18,11 +20,15 @@ const App: React.FC = () => {
             <>
               <Hero />
               <Projects />
+              <Contact/>
             </>
           }
         />
         {/* Page spécifique pour le Script Bash */}
         <Route path="/script" element={<ScriptPage />} />
+        <Route path="/project" element={<Projects/>}/>
+        <Route path="/admin/message" element={<AdminMessages/>}/>
+        <Route path="/project/:name" element={<ProjectDétails/>}/>
       </Routes>
       {/* <Contact/> */}
     </Router>

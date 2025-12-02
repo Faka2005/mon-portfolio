@@ -1,96 +1,120 @@
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
+
+const projectsData = [
+  {
+    title: "Lumnie Learning",
+    desc: "Plateforme SaaS d’apprentissage en ligne (en développement).",
+    img: "/images/project1.png",
+    demo: "https://lumnie-learnig.vercel.app/",
+    code: "https://github.com/Faka2005/lumnie-learning",
+    slug: "lumnie-learning",
+  },
+  {
+    title: "Campus Center",
+    desc: "Application web pour connecter les étudiants (en développement).",
+    img: "/images/project2.png",
+    demo: "https://campus-centre.vercel.app",
+    code: "https://github.com/Faka2005/campus-centre",
+    slug: "campus-center",
+  },
+  {
+    title: "Password Manager",
+    desc: "Gestionnaire sécurisé de mots de passe (à améliorer).",
+    img: "/images/project3.png",
+    demo: "https://password-manager.vercel.app",
+    code: "https://github.com/Faka2005/password-manager",
+    slug: "password-manager",
+  },
+  {
+    title: "Pixhub",
+    desc: "Gestionnaire de galerie",
+    img: "/images/project4.png",
+    demo: "https://pixhub-wine.vercel.app",
+    code: "https://github.com/Faka2005/pixhub",
+    slug: "pixhub",
+  },
+  {
+    title: "Script Bash",
+    desc: "Script Bash permettant d’installer automatiquement des outils Linux.",
+    img: "/images/project5.png",
+    demo: "/script",
+    code: "https://github.com/Faka2005/bash-script",
+    slug: "script-bash",
+  },
+];
+
 const Projects: React.FC = () => {
   return (
     <section id="projects" className="bg-black text-light py-5">
       <Container>
-        <h2 className="text-center mb-5">Mes Projets</h2>
+        <h2 className="text-center mb-5 fw-bold">Mes Projets</h2>
 
         <Row className="g-4">
-          {/* --- Projet 1 --- */}
-          <Col md={4} sm={6} xs={12}>
-            <Card bg="dark" text="light" className="shadow-lg h-100">
-              <Card.Img variant="top" src="/images/project1.png" />
-              <Card.Body>
-                <Card.Title>Lumnie Learning</Card.Title>
-                <Card.Text>
-                  Plateforme SaaS d’apprentissage en ligne (en développement).
-                </Card.Text>
-                <Button
-                  href="https://lumnie-learning.vercel.app"
-                  target="_blank"
-                  rel="noreferrer"
-                  variant="primary"
-                >
-                  Voir le site
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
+          {projectsData.map((p, index) => (
+            <Col md={4} sm={6} xs={12} key={index}>
+              <Card className="project-card bg-dark text-light shadow-lg h-100">
+                <div className="project-img-wrapper">
+                  <Card.Img src={p.img} className="project-img" />
+                </div>
 
-          {/* --- Projet 2 --- */}
-          <Col md={4} sm={6} xs={12}>
-            <Card bg="dark" text="light" className="shadow-lg h-100">
-              <Card.Img variant="top" src="/images/project2.png" />
-              <Card.Body>
-                <Card.Title>Campus Center</Card.Title>
-                <Card.Text>
-                  Application web pour connecter les étudiants (en développement).
-                </Card.Text>
-                <Button
-                  href="https://campus-centre.vercel.app"
-                  target="_blank"
-                  rel="noreferrer"
-                  variant="primary"
-                >
-                  Voir le site
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
+                <Card.Body>
+                  <Card.Title className="fw-bold">{p.title}</Card.Title>
+                  <Card.Text>{p.desc}</Card.Text>
 
-          {/* --- Projet 3 --- */}
-          <Col md={4} sm={6} xs={12}>
-            <Card bg="dark" text="light" className="shadow-lg h-100">
-              <Card.Img variant="top" src="/images/project3.png" />
-              <Card.Body>
-                <Card.Title>Password Manager</Card.Title>
-                <Card.Text>
-                  Gestionnaire sécurisé de mots de passe développé en autonomie.
-                </Card.Text>
-                <Button
-                  href="https://password-manager.vercel.app"
-                  target="_blank"
-                  rel="noreferrer"
-                  variant="primary"
-                >
-                  Voir le site
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
+                  <div className="buttons-wrapper">
+                    <Button href={p.demo} target="_blank" variant="primary">
+                      Voir le projet
+                    </Button>
 
-          {/* --- Projet Script Bash --- */}
-          <Col md={4} sm={6} xs={12}>
-            <Card bg="dark" text="light" className="shadow-lg h-100">
-              <Card.Img variant="top" src="/images/project3.png" />
-              <Card.Body>
-                <Card.Title>Script Bash</Card.Title>
-                <Card.Text>
-                  Script Bash permettant d’installer automatiquement des outils sur Linux.
-                </Card.Text>
-                <Button
-                  href="/script"
-                  target="_blank"
-                  rel="noreferrer"
-                  variant="primary"
-                >
-                  Voir le site
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
+                    <Button href={p.code} target="_blank" variant="outline-light">
+                      Voir le code
+                    </Button>
+
+                    <Button href={`/project/${p.slug}`} variant="outline-light">
+                      Voir la description
+                    </Button>
+                  </div>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
         </Row>
       </Container>
+
+      <style>{`
+        .project-card {
+          border-radius: 12px;
+          overflow: hidden;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+        }
+
+        .project-img-wrapper {
+          height: 220px;
+          overflow: hidden;
+        }
+
+        .project-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.4s ease;
+        }
+
+        .project-card:hover .project-img {
+          transform: scale(1.06);
+        }
+
+        .buttons-wrapper {
+          display: flex;
+          justify-content: space-between;
+          margin-top: 20px;
+        }
+      `}</style>
     </section>
   );
 };
