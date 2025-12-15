@@ -14,22 +14,17 @@ const Hero: React.FC = () => {
     >
       <Container>
 
+        
+        <h1 className="fw-bold">
+          <span className="text-primary">YMAMOU Yassar</span>
+        </h1>
 
-<h1 className="fw-bold">
-  Salut, je suis <span className="text-primary">YMAMOU Yassar</span>
-</h1>
-
-<p className="lead">
-  Étudiant passionné par l’informatique, je développe depuis plus de 3 ans des
-  applications web et mobiles. J’aime concevoir des solutions modernes,
-  performantes et bien structurées, en travaillant notamment avec React,
-  Node.js et MongoDB. Je m’intéresse également aux systèmes embarqués
-  (Arduino, MyRIO). Mon objectif est de devenir développeur full-stack et de
-  créer des applications utiles à fort impact.
-</p>
+        <p className="lead">
+          Développeur web passionné, avec plus de 4 ans d’expérience dans la conception d’applications web et mobiles. J’accorde une importance particulière à la structure du code, aux performances et à l’expérience utilisateur, en utilisant principalement React, Node.js et MongoDB.
+        </p>
 
         {/* 🚀 BARRE DÉFILANTE PREMIUM */}
-            <Logo/>
+        <Logo />
         <Button variant="primary" href="#projects" className="mt-4">
           Voir mes projets
         </Button>

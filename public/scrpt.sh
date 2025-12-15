@@ -1,45 +1,32 @@
 #!/bin/bash
 
-# Couleurs pour l'affichage
+# ===============================
+# 🌐 Script d'installation Serveur complet Ubuntu
+# (Samba, WireGuard, Net-tools, Tailscale, VSCode, Go, Node.js, Python,
+# React, TypeScript, React Native, VirtualBox, Flutter, Gestion Users)
+# ===============================
+
 GREEN='\033[0;32m'
 RED='\033[0;31m'
-NC='\033[0m' # No Color
+NC='\033[0m'
 
-# Fonction pour exécuter `apt update` silencieusement
+# ===============================
+# Fonctions utilitaires
+# ===============================
 apt_silent_update() {
-    echo "Mise à jour des listes de paquets en cours..."
+    echo "📦 Mise à jour des paquets..."
     sudo apt update -qq > /dev/null 2>&1
-    if [ $? -eq 0 ]; then
-        echo "Mise à jour des listes de paquets réussie."
-    else
-        echo "Erreur lors de la mise à jour des listes de paquets." >&2
-    fi
+    [ $? -eq 0 ] && echo "✅ apt update OK" || echo "❌ Erreur update"
 }
 
-# Fonction pour exécuter `apt upgrade` silencieusement
-apt_silent_upgrade() {
-    echo "Mise à niveau des paquets en cours..."
-    sudo apt upgrade -qq -y > /dev/null 2>&1
-    if [ $? -eq 0 ]; then
-        echo "Mise à niveau des paquets réussie."
-    else
-        echo "Erreur lors de la mise à niveau des paquets." >&2
-    fi
-}
-
-# Fonction pour exécuter `apt install` silencieusement
 apt_silent_install() {
     local package="$1"
-    echo "Installation du paquet '$package' en cours..."
+    echo "📥 Installation de $package..."
     sudo apt install -qq -y "$package" > /dev/null 2>&1
-    if [ $? -eq 0 ]; then
-        echo "Installation de '$package' réussie."
-    else
-        echo "Erreur lors de l'installation de '$package'." >&2
-    fi
+    [ $? -eq 0 ] && echo "✅ $package installé" || echo "❌ Erreur sur $package"
 }
+#Demande à l'utilisateur une entrer
 
-# Fonction pour demander et vérifier une entrée utilisateur
 ask_input() {
     local prompt="$1"
     local input_var
@@ -49,57 +36,58 @@ ask_input() {
     echo "$input_var"
 }
 
-install_net-tools(){
-    echo -e "${GREEN}Installation de net-tools...${NC}"
-    
-    # Utilisation des fonctions apt pour la mise à jour et installation de net-tools
+# ===============================
+# Ajouter des utilisateurs à un groupe
+# ===============================
+ajoutegroup() {
+    echo -e "${GREEN}➕ Ajouter un utilisateur à un groupe${NC}"
+    group=$(ask_input "Nom du groupe : ")
+    user=$(ask_input "Nom de l'utilisateur : ")
+    sudo usermod -aG "$group" "$user"
+    echo -e "${GREEN}Utilisateur ajouté !${NC}"
+}
+
+# ===============================
+# Installation Net-tools
+# ===============================
+install_net_tools() {
+    echo -e "${GREEN}🔧 Installation de net-tools...${NC}"
     apt_silent_update
     apt_silent_install "net-tools"
 }
 
-# Fonction d'installation de Samba
+# ===============================
+# Installation Samba
+# ===============================
 install_samba() {
-    echo -e "${GREEN}Installation de Samba...${NC}"
-    
-    # Utilisation des fonctions apt pour la mise à jour et installation de Samba
+    echo -e "${GREEN}💾 Installation de Samba...${NC}"
     apt_silent_update
     apt_silent_install "samba"
 
-    # Demande des informations à l'utilisateur
     share_name=$(ask_input "Entrez le nom du partage Samba : ")
     group_name=$(ask_input "Entrez le nom du groupe Samba : ")
 
-    # Création du groupe
     sudo groupadd "$group_name"
-    echo -e "${GREEN}Le groupe $group_name a été créé.${NC}"
+    echo -e "${GREEN}Groupe $group_name créé.${NC}"
 
-    # Ajouter des utilisateurs au groupe et à Samba
     while true; do
-        user_name=$(ask_input "Entrez le nom d'utilisateur à ajouter à Samba (ou tapez 'fin' pour terminer) : ")
-        if [[ "$user_name" == "fin" ]]; then
-            break
-        fi
-        # Créer l'utilisateur s'il n'existe pas déjà
+        user_name=$(ask_input "Entrez un utilisateur à ajouter (ou 'fin' pour terminer) : ")
+        if [[ "$user_name" == "fin" ]]; then break; fi
         if ! id -u "$user_name" > /dev/null 2>&1; then
             sudo useradd -m "$user_name"
-            echo -e "${GREEN}L'utilisateur $user_name a été créé.${NC}"
         fi
-        # Ajouter l'utilisateur au groupe et à Samba
         sudo usermod -aG "$group_name" "$user_name"
         sudo smbpasswd -a "$user_name"
-        echo -e "${GREEN}L'utilisateur $user_name a été ajouté à Samba et au groupe $group_name.${NC}"
+        echo -e "${GREEN}$user_name ajouté à Samba.${NC}"
     done
 
-    echo -e "${GREEN}Configuration de Samba...${NC}"
-    # Sauvegarder l'ancienne configuration de Samba
     sudo cp /etc/samba/smb.conf /etc/samba/smb.conf.bak
 
-    # Ajouter la configuration du partage Samba
     cat <<EOL | sudo tee -a /etc/samba/smb.conf
 
 [$share_name]
     path = /srv/samba/$share_name
-    valid users = @${group_name}
+    valid users = @$group_name
     guest ok = no
     writable = yes
     browseable = yes
@@ -107,49 +95,221 @@ install_samba() {
     directory mask = 0775
 EOL
 
-    # Créer le répertoire de partage
     sudo mkdir -p /srv/samba/"$share_name"
     sudo chown -R :"$group_name" /srv/samba/"$share_name"
     sudo chmod -R 0775 /srv/samba/"$share_name"
-
-    echo -e "${GREEN}Redémarrage du service Samba...${NC}"
     sudo systemctl restart smbd
 
-    echo -e "${GREEN}Le serveur Samba avec le partage '$share_name' pour le groupe '$group_name' a été configuré avec succès.${NC}"
-    echo -e "${GREEN} Il est disponible à l'adresse suivante '$(hostname -I | awk '{print $1}')\\$share_name'"
+    echo -e "${GREEN}✅ Samba configuré avec succès.${NC}"
+}
+
+# ===============================
+# Installation WireGuard
+# ===============================
+install_wireguard() {
+    echo -e "${GREEN}🔒 Installation de WireGuard...${NC}"
+    apt_silent_update
+    apt_silent_install "wireguard"
+
+    SERVER_PRIVATE_KEY=$(wg genkey)
+    SERVER_PUBLIC_KEY=$(echo $SERVER_PRIVATE_KEY | wg pubkey)
+    CLIENT_PRIVATE_KEY=$(wg genkey)
+    CLIENT_PUBLIC_KEY=$(echo $CLIENT_PRIVATE_KEY | wg pubkey)
+
+    sudo mkdir -p /etc/wireguard
+
+    cat <<EOL | sudo tee /etc/wireguard/wg0.conf
+[Interface]
+PrivateKey = $SERVER_PRIVATE_KEY
+Address = 10.0.0.1/24
+ListenPort = 51820
+SaveConfig = true
+
+[Peer]
+PublicKey = $CLIENT_PUBLIC_KEY
+AllowedIPs = 10.0.0.2/32
+EOL
+
+    sudo systemctl enable wg-quick@wg0
+    sudo systemctl start wg-quick@wg0
+
+    echo -e "${GREEN}WireGuard configuré.${NC}"
+}
+
+# ===============================
+# Installation Tailscale
+# ===============================
+install_tailscale() {
+    echo -e "${GREEN}🌐 Installation de Tailscale...${NC}"
+    curl -fsSL https://tailscale.com/install.sh | sh
+    sudo tailscale up
+    tailscale ip
+}
+
+# ===============================
+# VSCode
+# ===============================
+install_vscode() {
+    echo -e "${GREEN}🟦 Installation de Visual Studio Code...${NC}"
+    sudo snap install code --classic
+}
+
+# ===============================
+# Go
+# ===============================
+install_go() {
+    echo -e "${GREEN}🐹 Installation de Go...${NC}"
+    apt_silent_update
+    apt_silent_install "golang-go"
+}
+
+# ===============================
+# Node.js + npm
+# ===============================
+install_node() {
+    echo -e "${GREEN}🟢 Installation Node.js...${NC}"
+    apt_silent_update
+    apt_silent_install "nodejs"
+    apt_silent_install "npm"
+}
+
+# ===============================
+# Python
+# ===============================
+install_python() {
+    echo -e "${GREEN}🐍 Installation Python...${NC}"
+    apt_silent_update
+    apt_silent_install "python3"
+    apt_silent_install "python3-pip"
+}
+
+# ===============================
+# React / TS / RN
+# ===============================
+install_react_ts() {
+    echo -e "${GREEN}⚛️ Installation React / TypeScript / React Native CLI...${NC}"
+    sudo npm install -g create-react-app react-native-cli typescript
+}
+
+# ===============================
+# Installation VirtualBox
+# ===============================
+install_virtualbox() {
+    echo -e "${GREEN}📦 Installation VirtualBox...${NC}"
+    apt_silent_update
+    apt_silent_install "virtualbox"
+}
+
+# ===============================
+# Installation Flutter
+# ===============================
+install_flutter() {
+    echo -e "${GREEN}📱 Installation Flutter...${NC}"
+
+    sudo apt install -y curl git unzip xz-utils zip libglu1-mesa > /dev/null 2>&1
+
+    cd ~
+    git clone https://github.com/flutter/flutter.git -b stable
+
+    if ! grep -q "flutter/bin" ~/.bashrc; then
+        echo 'export PATH="$PATH:$HOME/flutter/bin"' >> ~/.bashrc
+    fi
+
+    export PATH="$PATH:$HOME/flutter/bin"
+
+    echo -e "${GREEN}Flutter installé !${NC}"
+}
+
+# ===============================
+# Création Projet Flutter
+# ===============================
+creer_projet_flutter() {
+    echo -e "${GREEN}📱 Création d'un projet Flutter...${NC}"
+
+    export PATH="$PATH:$HOME/flutter/bin"
+
+    projet=$(ask_input "Nom du projet Flutter : ")
+    flutter create "$projet"
+
+    echo -e "${GREEN}Projet Flutter créé dans ~/$projet${NC}"
 }
 
 
-# Menu principal
-while true; do
-    echo -e "${GREEN}Bienvenue dans l'outil de configuration de serveur.${NC}"
-    echo "Que voulez-vous configurer ?"
 
-    # Créer une liste (tableau) avec quelques éléments
-    menu=("Samba"  "Net-tools" "Arrêter le script")
+show_help() {
+    echo -e "\n${GREEN}=== AIDE DES FONCTIONS ===${NC}"
+    
+    functions=(
+        "apt_silent_update : Met à jour les paquets silencieusement"
+        "apt_silent_install : Installe un paquet silencieusement"
+        "ask_input : Demande une saisie utilisateur"
+        "ajoutegroup : Ajouter un utilisateur à un groupe"
+        "install_net_tools : Installer net-tools"
+        "install_samba : Installer et configurer Samba"
+        "install_wireguard : Installer et configurer WireGuard"
+        "install_tailscale : Installer Tailscale"
+        "install_vscode : Installer VSCode"
+        "install_go : Installer Go"
+        "install_node : Installer Node.js et npm"
+        "install_python : Installer Python3 et pip3"
+        "install_react_ts : Installer React / TypeScript / React Native CLI"
+        "install_virtualbox : Installer VirtualBox"
+        "install_flutter : Installer Flutter"
+        "creer_projet_flutter : Créer un projet Flutter"
+    )
 
-    # Afficher le contenu de la liste avec les indices
-    echo "Contenu de la liste :"
-    for index in "${!menu[@]}"; do
-        echo "$((index+1)) ) ${menu[$index]}"
+    echo "Choisis une fonction pour voir sa description :"
+    select fn in "${functions[@]}" "Retour"; do
+        if [[ "$fn" == "Retour" ]]; then
+            break
+        elif [[ -n "$fn" ]]; then
+            echo " ${fn#*:}"       # Description
+            echo
+        else
+            echo -e "${RED}Choix invalide${NC}"
+        fi
     done
+}
 
-    # Demander à l'utilisateur de faire un choix
-    read -p "Entrez votre choix [1-3]: " choice
+# ===============================
+# MENU PRINCIPAL
+# ===============================
+while true; do
+    echo -e "\n${GREEN}=== MENU INSTALLATION SERVEUR ===${NC}"
+    echo "1) Installer Samba"
+    echo "2) Installer WireGuard"
+    echo "3) Installer Net-tools"
+    echo "4) Installer Tailscale"
+    echo "5) Installer VSCode"
+    echo "6) Installer Go"
+    echo "7) Installer Node.js"
+    echo "8) Installer Python"
+    echo "9) Installer React / TypeScript / React Native"
+    echo "10) Installer VirtualBox"
+    echo "11) Installer Flutter"
+    echo "12) Créer un projet Flutter"
+    echo "13) Ajouter un utilisateur à un groupe"
+    echo "14) Demander des exxplication de fonction"
+    echo "15)  Quitter"
+
+    read -p "Votre choix [1-15]: " choice
 
     case $choice in
-        1)
-            install_samba
-            ;;
-        2)
-            install_net-tools
-            ;;
-        3)
-            echo -e "${RED}Sortie du script.${NC}"
-            exit 0
-            ;;
-        *)
-            echo -e "${RED}Choix invalide, veuillez réessayer.${NC}"
-            ;;
+        1) install_samba ;;
+        2) install_wireguard ;;
+        3) install_net_tools ;;
+        4) install_tailscale ;;
+        5) install_vscode ;;
+        6) install_go ;;
+        7) install_node ;;
+        8) install_python ;;
+        9) install_react_ts ;;
+        10) install_virtualbox ;;
+        11) install_flutter ;;
+        12) creer_projet_flutter ;;
+        13) ajoutegroup ;;
+        14)show_help;;
+        15) echo -e "${RED}👋 Fin du script.${NC}"; exit 0 ;;
+        *) echo -e "${RED}Choix invalide.${NC}" ;;
     esac
 done

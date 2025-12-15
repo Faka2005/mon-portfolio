@@ -33,14 +33,7 @@ const projectsData = [
     code: "https://github.com/Faka2005/pixhub",
     slug: "pixhub",
   },
-  {
-    title: "Script Bash",
-    desc: "Script Bash permettant d’installer automatiquement des outils Linux.",
-    img: "/images/project5.png",
-    demo: "/script",
-    code: "https://github.com/Faka2005/bash-script",
-    slug: "script-bash",
-  },
+
 ];
 
 const Projects: React.FC = () => {

@@ -7,7 +7,7 @@ import Projects from "./components/Projects";
 import ScriptPage from "./components/ScriptBashPage"; // page pour le script Bash
 import Contact from "./components/Contact";
 import ProjectDétails from "./components/ProjectDetail";
-import AdminMessages from "./components/Admin";
+import AdminMessages from "./components/AdminMessage";
 const App: React.FC = () => {
   return (
     <Router>

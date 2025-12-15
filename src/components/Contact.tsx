@@ -59,7 +59,7 @@ export default function Contact() {
 
           <Form.Group className="mb-3">
             <Form.Label>Message</Form.Label>
-            <Form.Control as="textarea" rows={4} name="message" required />
+            <Form.Control as="textarea" rows={4} name="message" placeholder="Le contenu de votre message" required />
           </Form.Group>
 
           <Button variant="primary" type="submit" className="w-100">

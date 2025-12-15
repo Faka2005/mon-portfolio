@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
-
+import { Link } from "react-router-dom";
 const ScriptPage: React.FC = () => {
   const [code, setCode] = useState<string>("");
 
@@ -14,12 +14,17 @@ const ScriptPage: React.FC = () => {
   }, []);
 
   return (
+    <>
+        <Link to="/#projects" className="btn btn-outline-light mb-4">
+      ← Retour à l'acceuil
+    </Link>
     <div style={{ padding: "2rem", backgroundColor: "#1e1e1e", minHeight: "100vh" }}>
       <h2 style={{ color: "#fff", marginBottom: "1rem" }}>Contenu du script.sh</h2>
       <SyntaxHighlighter language="bash" style={oneDark}>
         {code}
       </SyntaxHighlighter>
     </div>
+    </>
   );
 };
 
