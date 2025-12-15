@@ -28,11 +28,7 @@ img {
   margin-top: 30px;
 }
 
-.skills-track {
-  display: flex;
-  gap: 60px;
-  animation: scroll 18s linear infinite;
-}
+
 
 .skills-track img {
   height: 55px;
@@ -57,17 +53,45 @@ img {
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
 }
 
-/* Animation défilement */
+.skills-track {
+  display: flex;
+  gap: 60px;
+  animation: scroll 18s linear infinite;
+  width: max-content;
+}
+
+/* Animation continue */
 @keyframes scroll {
   0% {
-    transform: translateX(100%);
+    transform: translateX(0);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }
 
 /* Ralentissement au hover */
 .skills-wrapper:hover .skills-track {
   animation-play-state: paused;
+}
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 80px;
+}
+
+.skill-item span {
+  font-size: 0.75rem;
+  color: #ccc;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  opacity: 0.85;
+  transition: color 0.3s ease, opacity 0.3s ease;
+}
+
+.skill-item:hover span {
+  color: #0d6efd;
+  opacity: 1;
 }

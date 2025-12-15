@@ -1,22 +1,35 @@
-export default function Logo(){
-    return (
-        <div className="skills-glass">
-            <div className="skills-wrapper">
-                <div className="skills-track">
-                    <img src="/logos/html.png" alt="HTML" />
-                    <img src="/logos/css.png" alt="CSS" />
-                    <img src="/logos/js.png" alt="JavaScript" />
-                    <img src="/logos/ts.png" alt="TypeScript" />
-                    <img src="/logos/react.png" alt="React" />
-                    <img src="/logos/node.png" alt="NodeJS" />
-                    <img src="/logos/express.png" alt="ExpressJS" />
-                    <img src="/logos/mongo.png" alt="MongoDB" />
-                    <img src="/logos/git.png" alt="Git" />
-                    <img src="/logos/postgresql.png" alt="PostgreSQL" />
-                    <img src="/logos/bash.png" alt="Bash" />
+export default function Logo() {
+  const skills = [
+    { name: "HTML", src: "/logos/html.png" },
+    { name: "CSS", src: "/logos/css.png" },
+    { name: "JavaScript", src: "/logos/js.png" },
+    { name: "TypeScript", src: "/logos/ts.png" },
+    { name: "React", src: "/logos/react.png" },
+    { name: "PHP", src: "/logos/php.png" },
+    { name: "NodeJS", src: "/logos/node.png" },
+    { name: "C", src: "/logos/c.png" },
+    { name: "Express", src: "/logos/express.png" },
+    { name: "MongoDB", src: "/logos/mongo.png" },
+    { name: "Git", src: "/logos/git.png" },
+    { name: "PostgreSQL", src: "/logos/postgresql.png" },
+    { name: "Bash", src: "/logos/bash.png" },
+    { name: "Kotlin", src: "/logos/kotlin.png" },
+    { name: "Go", src: "/logos/go.png" },
+  ];
 
-                </div>
-            </div>
+  return (
+<div className="skills-glass">
+  <div className="skills-wrapper">
+    <div className="skills-track">
+      {[...skills, ...skills].map((skill, index) => (
+        <div className="skill-item" key={index}>
+          <img src={skill.src} alt={skill.name} />
+          <span>{skill.name}</span>
         </div>
-    )
+      ))}
+    </div>
+  </div>
+</div>
+
+  );
 }
