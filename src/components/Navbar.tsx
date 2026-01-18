@@ -9,7 +9,7 @@ const NavbarComponent: React.FC = () => {
         <Navbar.Toggle aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link href="/">Acceuil</Nav.Link>
+            <Nav.Link href="/">Acceuill</Nav.Link>
             <Nav.Link href="#projects">Projets</Nav.Link>
             <Nav.Link href="#contact">Contact</Nav.Link>
           </Nav>

@@ -4,7 +4,7 @@ import { Container, Button, Badge } from "react-bootstrap";
 const projectsData = {
   "lumnie-learning": {
     title: "Lumnie Learning",
-    description: "Plateforme SaaS d’apprentissage en ligne.",
+    description: "Lumnie Learning est une plateforme SaaS qui permet aux utilisateurs d’apprendre en ligne grâce à des parcours interactifs. Actuellement en développement, elle vise à offrir une expérience intuitive et personnalisée.",
     img: "/images/project1.png",
     technologies: ["js", "ts"],
     demo: "https://lumnie-learnig.vercel.app/",
@@ -13,7 +13,7 @@ const projectsData = {
 
   "campus-center": {
     title: "Campus Center",
-    description: "Application web permettant aux étudiants de communiquer.",
+    description: "Application web pour connecter les étudiants et faciliter l’échange d’informations et de ressources. Conçue pour améliorer la collaboration et la vie étudiante.",
     img: "/images/project2.png",
     technologies: ["react", "node", "express", "mongo"],
     demo: "https://campus-centre.vercel.app",
@@ -22,7 +22,7 @@ const projectsData = {
 
   "password-manager": {
     title: "Password Manager",
-    description: "Gestionnaire sécurisé de mots de passe.",
+    description: "Gestionnaire sécurisé de mots de passe permettant de stocker et organiser vos identifiants en toute sécurité. Fonctionnalités en constante amélioration pour garantir la confidentialité.",
     img: "/images/Safekey_entrer.png",
     technologies: ["react", "mongo","express","node"],
     demo: "https://safekey-nine.vercel.app/",
@@ -31,7 +31,23 @@ const projectsData = {
 
   "pixhub": {
     title: "Pixhub",
-    description: "Galerie photo.",
+    description: "Gestionnaire de galerie photo moderne, permettant d’organiser, visualiser et partager facilement vos images.",
+    img: "/images/project4.png",
+    technologies: ["react", "mongo","express","node"],
+    demo: "https://pixhub-wine.vercel.app",
+    code: "https://github.com/Faka2005/pixhub",
+  },
+    "serveur-go": {
+    title: "Serveur de transfére de fichier",
+    description: "Gestionnaire de galerie photo moderne, permettant d’organiser, visualiser et partager facilement vos images.",
+    img: "/images/project4.png",
+    technologies: ["react", "mongo","express","node"],
+    demo: "https://pixhub-wine.vercel.app",
+    code: "https://github.com/Faka2005/pixhub",
+  },
+    "e-commerce": {
+    title: "Serveur E-commerce",
+    description: "Gestionnaire de galerie photo moderne, permettant d’organiser, visualiser et partager facilement vos images.",
     img: "/images/project4.png",
     technologies: ["react", "mongo","express","node"],
     demo: "https://pixhub-wine.vercel.app",
@@ -61,7 +77,7 @@ const ProjectDetails = () => {
     </Link>
 
     <div className="project-card mx-auto">
-      <h1 className="fw-bold mb-3 text-center"><strong>{project.title}</strong>{project.title}</h1>
+      <h1 className="fw-bold mb-3 text-center"><strong>{project.title}</strong></h1>
 
       <img
         src={project.img}
