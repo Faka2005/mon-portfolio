@@ -1,46 +1,13 @@
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
-const projectsData = [
-  {
-    title: "Lumnie Learning",
-    desc: "Plateforme SaaS d’apprentissage en ligne (en développement).",
-    img: "/images/project1.png",
-    demo: "https://lumnie-learnig.vercel.app/",
-    code: "https://github.com/Faka2005/lumnie-learning",
-    slug: "lumnie-learning",
-  },
-  {
-    title: "Campus Center",
-    desc: "Application web pour connecter les étudiants (en développement).",
-    img: "/images/project2.png",
-    demo: "https://campus-centre.vercel.app",
-    code: "https://github.com/Faka2005/campus-centre",
-    slug: "campus-center",
-  },
-  {
-    title: "Password Manager",
-    desc: "Gestionnaire sécurisé de mots de passe (à améliorer).",
-    img: "/images/project3.png",
-    demo: "https://password-manager.vercel.app",
-    code: "https://github.com/Faka2005/password-manager",
-    slug: "password-manager",
-  },
-  {
-    title: "Pixhub",
-    desc: "Gestionnaire de galerie",
-    img: "/images/project4.png",
-    demo: "https://pixhub-wine.vercel.app",
-    code: "https://github.com/Faka2005/pixhub",
-    slug: "pixhub",
-  },
-
-];
-
+import { projectsData } from "../data/ProjectDataWeb";
+import { projectsIoTData } from "../data/ProjetDataIoT";
 const Projects: React.FC = () => {
-  return (
+  return (<>
+    <h1>Mes projets </h1>
     <section id="projects" className="bg-black text-light py-5">
       <Container>
-        <h2 className="text-center mb-5 fw-bold">Mes Projets</h2>
+        <h2 className="text-center mb-5 fw-bold">Projets Web</h2>
 
         <Row className="g-4">
           {projectsData.map((p, index) => (
@@ -63,7 +30,7 @@ const Projects: React.FC = () => {
                       Voir le code
                     </Button>
 
-                    <Button href={`/project/${p.slug}`} variant="outline-light">
+                    <Button href={`/project/web/${p.slug}`} variant="outline-light">
                       Voir la description
                     </Button>
                   </div>
@@ -109,6 +76,42 @@ const Projects: React.FC = () => {
         }
       `}</style>
     </section>
+    <section id="projects-iot" className="bg-black text-light py-5">
+      <Container>
+        <h2 className="text-center mb-5 fw-bold">Projets IoT & Électronique</h2>
+
+        <Row className="g-4">
+          {projectsIoTData.map((p, index) => (
+            <Col md={4} sm={6} xs={12} key={index}>
+              <Card className="project-card bg-dark text-light shadow-lg h-100">
+                
+                <div className="project-img-wrapper">
+                  <Card.Img src={p.img} className="project-img" />
+                </div>
+
+                <Card.Body className="d-flex flex-column">
+                  <Card.Title className="fw-bold">{p.title}</Card.Title>
+                  <Card.Text className="flex-grow-1">
+                    {p.desc}
+                  </Card.Text>
+
+                  <div className="buttons-wrapper mt-3">
+                    <Button
+                      href={`project/iot/${p.slug}`}
+                      variant="outline-light"
+                    >
+                      Voir la description
+                    </Button>
+                  </div>
+                </Card.Body>
+
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </Container>
+    </section>
+    </>
   );
 };
 

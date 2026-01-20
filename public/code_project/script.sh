@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ===============================
-# 🌐 Script d'installation Serveur complet Ubuntu
+#  Script d'installation Serveur complet Ubuntu
 # (Samba, WireGuard, Net-tools, Tailscale, VSCode, Go, Node.js, Python,
 # React, TypeScript, React Native, VirtualBox, Flutter, Gestion Users)
 # ===============================
@@ -14,18 +14,17 @@ NC='\033[0m'
 # Fonctions utilitaires
 # ===============================
 apt_silent_update() {
-    echo "📦 Mise à jour des paquets..."
+    echo " Mise à jour des paquets..."
     sudo apt update -qq > /dev/null 2>&1
-    [ $? -eq 0 ] && echo "✅ apt update OK" || echo "❌ Erreur update"
+    [ $? -eq 0 ] && echo " apt update OK" || echo " Erreur update"
 }
 
 apt_silent_install() {
     local package="$1"
-    echo "📥 Installation de $package..."
+    echo " Installation de $package..."
     sudo apt install -qq -y "$package" > /dev/null 2>&1
-    [ $? -eq 0 ] && echo "✅ $package installé" || echo "❌ Erreur sur $package"
+    [ $? -eq 0 ] && echo " $package installé" || echo " Erreur sur $package"
 }
-#Demande à l'utilisateur une entrer
 
 ask_input() {
     local prompt="$1"
@@ -40,7 +39,7 @@ ask_input() {
 # Ajouter des utilisateurs à un groupe
 # ===============================
 ajoutegroup() {
-    echo -e "${GREEN}➕ Ajouter un utilisateur à un groupe${NC}"
+    echo -e "${GREEN} Ajouter un utilisateur à un groupe${NC}"
     group=$(ask_input "Nom du groupe : ")
     user=$(ask_input "Nom de l'utilisateur : ")
     sudo usermod -aG "$group" "$user"
@@ -51,7 +50,7 @@ ajoutegroup() {
 # Installation Net-tools
 # ===============================
 install_net_tools() {
-    echo -e "${GREEN}🔧 Installation de net-tools...${NC}"
+    echo -e "${GREEN} Installation de net-tools...${NC}"
     apt_silent_update
     apt_silent_install "net-tools"
 }
@@ -60,7 +59,7 @@ install_net_tools() {
 # Installation Samba
 # ===============================
 install_samba() {
-    echo -e "${GREEN}💾 Installation de Samba...${NC}"
+    echo -e "${GREEN} Installation de Samba...${NC}"
     apt_silent_update
     apt_silent_install "samba"
 
@@ -100,14 +99,14 @@ EOL
     sudo chmod -R 0775 /srv/samba/"$share_name"
     sudo systemctl restart smbd
 
-    echo -e "${GREEN}✅ Samba configuré avec succès.${NC}"
+    echo -e "${GREEN} Samba configuré avec succès.${NC}"
 }
 
 # ===============================
 # Installation WireGuard
 # ===============================
 install_wireguard() {
-    echo -e "${GREEN}🔒 Installation de WireGuard...${NC}"
+    echo -e "${GREEN} Installation de WireGuard...${NC}"
     apt_silent_update
     apt_silent_install "wireguard"
 
@@ -140,7 +139,7 @@ EOL
 # Installation Tailscale
 # ===============================
 install_tailscale() {
-    echo -e "${GREEN}🌐 Installation de Tailscale...${NC}"
+    echo -e "${GREEN} Installation de Tailscale...${NC}"
     curl -fsSL https://tailscale.com/install.sh | sh
     sudo tailscale up
     tailscale ip
@@ -150,7 +149,7 @@ install_tailscale() {
 # VSCode
 # ===============================
 install_vscode() {
-    echo -e "${GREEN}🟦 Installation de Visual Studio Code...${NC}"
+    echo -e "${GREEN} Installation de Visual Studio Code...${NC}"
     sudo snap install code --classic
 }
 
@@ -158,7 +157,7 @@ install_vscode() {
 # Go
 # ===============================
 install_go() {
-    echo -e "${GREEN}🐹 Installation de Go...${NC}"
+    echo -e "${GREEN} Installation de Go...${NC}"
     apt_silent_update
     apt_silent_install "golang-go"
 }
@@ -167,7 +166,7 @@ install_go() {
 # Node.js + npm
 # ===============================
 install_node() {
-    echo -e "${GREEN}🟢 Installation Node.js...${NC}"
+    echo -e "${GREEN} Installation Node.js...${NC}"
     apt_silent_update
     apt_silent_install "nodejs"
     apt_silent_install "npm"
@@ -177,7 +176,7 @@ install_node() {
 # Python
 # ===============================
 install_python() {
-    echo -e "${GREEN}🐍 Installation Python...${NC}"
+    echo -e "${GREEN} Installation Python...${NC}"
     apt_silent_update
     apt_silent_install "python3"
     apt_silent_install "python3-pip"
@@ -187,7 +186,7 @@ install_python() {
 # React / TS / RN
 # ===============================
 install_react_ts() {
-    echo -e "${GREEN}⚛️ Installation React / TypeScript / React Native CLI...${NC}"
+    echo -e "${GREEN} Installation React / TypeScript / React Native CLI...${NC}"
     sudo npm install -g create-react-app react-native-cli typescript
 }
 
@@ -195,7 +194,7 @@ install_react_ts() {
 # Installation VirtualBox
 # ===============================
 install_virtualbox() {
-    echo -e "${GREEN}📦 Installation VirtualBox...${NC}"
+    echo -e "${GREEN} Installation VirtualBox...${NC}"
     apt_silent_update
     apt_silent_install "virtualbox"
 }
@@ -204,7 +203,7 @@ install_virtualbox() {
 # Installation Flutter
 # ===============================
 install_flutter() {
-    echo -e "${GREEN}📱 Installation Flutter...${NC}"
+    echo -e "${GREEN} Installation Flutter...${NC}"
 
     sudo apt install -y curl git unzip xz-utils zip libglu1-mesa > /dev/null 2>&1
 
@@ -224,7 +223,7 @@ install_flutter() {
 # Création Projet Flutter
 # ===============================
 creer_projet_flutter() {
-    echo -e "${GREEN}📱 Création d'un projet Flutter...${NC}"
+    echo -e "${GREEN} Création d'un projet Flutter...${NC}"
 
     export PATH="$PATH:$HOME/flutter/bin"
 
@@ -236,39 +235,52 @@ creer_projet_flutter() {
 
 
 
-show_help() {
-    echo -e "\n${GREEN}=== AIDE DES FONCTIONS ===${NC}"
-    
-    functions=(
-        "apt_silent_update : Met à jour les paquets silencieusement"
-        "apt_silent_install : Installe un paquet silencieusement"
-        "ask_input : Demande une saisie utilisateur"
-        "ajoutegroup : Ajouter un utilisateur à un groupe"
-        "install_net_tools : Installer net-tools"
-        "install_samba : Installer et configurer Samba"
-        "install_wireguard : Installer et configurer WireGuard"
-        "install_tailscale : Installer Tailscale"
-        "install_vscode : Installer VSCode"
-        "install_go : Installer Go"
-        "install_node : Installer Node.js et npm"
-        "install_python : Installer Python3 et pip3"
-        "install_react_ts : Installer React / TypeScript / React Native CLI"
-        "install_virtualbox : Installer VirtualBox"
-        "install_flutter : Installer Flutter"
-        "creer_projet_flutter : Créer un projet Flutter"
-    )
 
-    echo "Choisis une fonction pour voir sa description :"
-    select fn in "${functions[@]}" "Retour"; do
-        if [[ "$fn" == "Retour" ]]; then
-            break
-        elif [[ -n "$fn" ]]; then
-            echo " ${fn#*:}"       # Description
-            echo
-        else
-            echo -e "${RED}Choix invalide${NC}"
-        fi
-    done
+# ===============================
+# Installer KiCad
+# ===============================
+
+install_kicad() {
+    echo -e "${GREEN} Installation KiCad...${NC}"
+
+    apt_silent_update
+
+    sudo add-apt-repository --yes ppa:kicad/kicad-9.0-releases > /dev/null 2>&1
+    apt_silent_update
+
+    apt_silent_install kicad
+    apt_silent_install kicad-footprints
+    apt_silent_install kicad-symbols
+    apt_silent_install kicad-packages3d
+
+    echo -e "${GREEN} KiCad installé avec succès${NC}"
+}
+
+#============================
+#Installer Android Studio
+#===========================
+
+install_android_studio() {
+    set -e
+
+    ANDROID_STUDIO_URL="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2024.1.2.12/android-studio-2024.1.2.12-linux.tar.gz"
+    INSTALL_DIR="/opt"
+    TMP_FILE="/tmp/android-studio.tar.gz"
+
+    echo " Téléchargement d'Android Studio..."
+    wget -O "$TMP_FILE" "$ANDROID_STUDIO_URL"
+
+    echo " Extraction dans $INSTALL_DIR..."
+    sudo tar -xzf "$TMP_FILE" -C "$INSTALL_DIR"
+
+    echo " Permissions..."
+    sudo chown -R $USER:$USER "$INSTALL_DIR/android-studio"
+
+    echo " Création du lanceur..."
+    "$INSTALL_DIR/android-studio/bin/studio.sh" &
+
+    echo " Android Studio installé !"
+    echo "➡ Lance-le avec : /opt/android-studio/bin/studio.sh"
 }
 
 # ===============================
@@ -289,8 +301,9 @@ while true; do
     echo "11) Installer Flutter"
     echo "12) Créer un projet Flutter"
     echo "13) Ajouter un utilisateur à un groupe"
-    echo "14) Demander des exxplication de fonction"
-    echo "15)  Quitter"
+    echo "14) Installer Kicad"
+    echo "15) Installer Android Studio"
+    echo "16)  Quitter"
 
     read -p "Votre choix [1-15]: " choice
 
@@ -308,8 +321,9 @@ while true; do
         11) install_flutter ;;
         12) creer_projet_flutter ;;
         13) ajoutegroup ;;
-        14)show_help;;
-        15) echo -e "${RED}👋 Fin du script.${NC}"; exit 0 ;;
+        14) install_kicad;;
+	15)install_android_studio;;
+	16) echo -e "${RED} Fin du script.${NC}"; exit 0 ;;
         *) echo -e "${RED}Choix invalide.${NC}" ;;
     esac
 done

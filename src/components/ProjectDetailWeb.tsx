@@ -1,47 +1,10 @@
 import { useParams, Link } from "react-router-dom";
 import { Container, Button, Badge } from "react-bootstrap";
-
-const projectsData = {
-  "lumnie-learning": {
-    title: "Lumnie Learning",
-    description: "Plateforme SaaS d’apprentissage en ligne.",
-    img: "/images/project1.png",
-    technologies: ["js", "ts"],
-    demo: "https://lumnie-learnig.vercel.app/",
-    code: "https://github.com/Faka2005/learning",
-  },
-
-  "campus-center": {
-    title: "Campus Center",
-    description: "Application web permettant aux étudiants de communiquer.",
-    img: "/images/project2.png",
-    technologies: ["react", "node", "express", "mongo"],
-    demo: "https://campus-centre.vercel.app",
-    code: "https://github.com/Faka2005/campus-centre",
-  },
-
-  "password-manager": {
-    title: "Password Manager",
-    description: "Gestionnaire sécurisé de mots de passe.",
-    img: "/images/Safekey_entrer.png",
-    technologies: ["react", "mongo","express","node"],
-    demo: "https://safekey-nine.vercel.app/",
-    code: "https://github.com/Faka2005/password-manager",
-  },
-
-  "pixhub": {
-    title: "Pixhub",
-    description: "Galerie photo.",
-    img: "/images/project4.png",
-    technologies: ["react", "mongo","express","node"],
-    demo: "https://pixhub-wine.vercel.app",
-    code: "https://github.com/Faka2005/pixhub",
-  },
-};
+import { projectsWeb } from "../data/ProjectDataWeb";
 
 const ProjectDetails = () => {
   const { name } = useParams();
-  const project = projectsData[name as keyof typeof projectsData];
+  const project = projectsWeb[name as keyof typeof projectsWeb];
 
   if (!project)
     return (

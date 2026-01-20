@@ -10,6 +10,7 @@ const NavbarComponent: React.FC = () => {
         <Navbar.Collapse id="navbar-nav">
           <Nav className="ms-auto">
             <Nav.Link href="/">Acceuil</Nav.Link>
+            <Nav.Link href="/#about">À Propos</Nav.Link>
             <Nav.Link href="#projects">Projets</Nav.Link>
             <Nav.Link href="#contact">Contact</Nav.Link>
           </Nav>

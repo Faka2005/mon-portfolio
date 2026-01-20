@@ -6,8 +6,9 @@ import Hero from "./components/Hero";
 import Projects from "./components/Projects";
 import ScriptPage from "./components/ScriptBashPage"; // page pour le script Bash
 import Contact from "./components/Contact";
-import ProjectDétails from "./components/ProjectDetail";
+import Project from "./components/Project";
 import AdminMessages from "./components/AdminMessage";
+import About from "./components/About";
 const App: React.FC = () => {
   return (
     <Router>
@@ -19,6 +20,7 @@ const App: React.FC = () => {
           element={
             <>
               <Hero />
+              <About/>
               <Projects />
               <Contact/>
             </>
@@ -28,7 +30,8 @@ const App: React.FC = () => {
         <Route path="/script" element={<ScriptPage />} />
         <Route path="/project" element={<Projects/>}/>
         <Route path="/admin/message" element={<AdminMessages/>}/>
-        <Route path="/project/:name" element={<ProjectDétails/>}/>
+        <Route path="/project/:categorie/:name" element={<Project/>}/>
+     
       </Routes>
       {/* <Contact/> */}
     </Router>
