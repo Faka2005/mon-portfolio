@@ -42,7 +42,7 @@ export default function Contact() {
   return (
     <section id="contact" className="py-5 bg-dark text-light">
       <Container style={{ maxWidth: "600px" }}>
-        <h2 className="text-center mb-4 fw-bold">Me Contacter</h2>
+        <h2 className="text-center mb-4 fw-bold">Envoyez-moi un message, je serai ravi d’échanger avec vous !</h2>
         {status === "success" && <Alert variant="success">Message envoyé !</Alert>}
         {status === "error" && <Alert variant="danger">Erreur lors de l'envoi</Alert>}
 
@@ -59,7 +59,7 @@ export default function Contact() {
 
           <Form.Group className="mb-3">
             <Form.Label>Message</Form.Label>
-            <Form.Control as="textarea" rows={4} name="message" placeholder="Le contenu de votre message" required />
+            <Form.Control as="textarea" rows={4} name="message" placeholder="Décrivez votre projet ou posez-moi une question" required />
           </Form.Group>
 
           <Button variant="primary" type="submit" className="w-100">

@@ -24,7 +24,7 @@ const ProjectDetails = () => {
     </Link>
 
     <div className="project-card mx-auto">
-      <h1 className="fw-bold mb-3 text-center"><strong>{project.title}</strong>{project.title}</h1>
+      <h1 className="fw-bold mb-3 text-center"><strong>{project.title}</strong></h1>
 
       <img
         src={project.img}

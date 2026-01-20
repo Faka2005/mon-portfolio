@@ -14,13 +14,13 @@ const Hero: React.FC = () => {
     >
       <Container>
 
-        
+
         <h1 className="fw-bold">
-          <span className="text-primary">YMAMOU Yassar</span>
+          <span className="text-primary">Dévellopeur YMAMOU Yassar</span>
         </h1>
 
         <p className="lead">
-          Développeur web passionné, avec plus de 4 ans d’expérience dans la conception d’applications web et mobiles. J’accorde une importance particulière à la structure du code, aux performances et à l’expérience utilisateur, en utilisant principalement React, Node.js et MongoDB.
+          Développeur web full-stack passionné, spécialisé en React, Node.js et MongoDB. Depuis 4 ans, je crée des applications web et mobiles performantes et ergonomiques, alliant code propre et expérience utilisateur optimale.
         </p>
 
         {/* 🚀 BARRE DÉFILANTE PREMIUM */}
