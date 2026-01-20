@@ -16,11 +16,11 @@ const Hero: React.FC = () => {
 
 
         <h1 className="fw-bold">
-          <span className="text-primary">Dévellopeur YMAMOU Yassar</span>
+          <span className="text-primary">Développeur junior YMAMOU Yassar</span>
         </h1>
 
         <p className="lead">
-          Développeur web full-stack passionné, spécialisé en React, Node.js et MongoDB. Depuis 4 ans, je crée des applications web et mobiles performantes et ergonomiques, alliant code propre et expérience utilisateur optimale.
+          Développeur junior web full-stack passionné, spécialisé en React, Node.js et MongoDB. Depuis 4 ans, je crée des applications web et mobiles performantes et ergonomiques, alliant code propre et expérience utilisateur optimale.
         </p>
 
         {/* 🚀 BARRE DÉFILANTE PREMIUM */}
