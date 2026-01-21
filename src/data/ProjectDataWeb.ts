@@ -25,7 +25,16 @@ export const projectsWeb = {
     demo: "https://safekey-nine.vercel.app/",
     code: "https://github.com/Faka2005/password-manager",
   },
-
+  
+  
+  "vizion": {
+    title: "Vizion",
+    description: "Vizualizer de fichier csv",
+    img: "/images/vizion.png",
+    technologies: ["react"],
+    demo: "",
+    code: "",
+  },
   "pixhub": {
     title: "Pixhub",
     description: "Galerie photo.",
@@ -68,5 +77,14 @@ export const projectsData = [
     code: "https://github.com/Faka2005/pixhub",
     slug: "pixhub",
   },
+{
+  title: "Vizion",
+  desc: "Vizion est un outil interactif de visualisation de fichiers CSV. Importez facilement vos données et explorez-les grâce à des tableaux dynamiques avec pagination et tri, directement dans votre navigateur.",
+  img: "/images/vizion.png",
+  demo: "",
+    code: "",
+  slug: "vizion",
+}
+
 
 ];
