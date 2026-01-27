@@ -1,23 +1,20 @@
 type DownloadButtonProps = {
   filePath: string;
-  fileName?: string; // facultatif
+  fileName: string;
+  color : "red" | "blue" | "green";
 };
-export default function DownloadButton ({fileName ,filePath}:DownloadButtonProps)  {
+
+
+
+export default function DownloadButton({
+  fileName,
+  filePath,
+  color = "blue",
+}: DownloadButtonProps) {
   const handleDownload = () => {
-    // Crée un lien temporaire
     const link = document.createElement("a");
     link.href = filePath;
-
-    // Définit le nom du fichier téléchargé si fourni
-    if (fileName) {
-      link.download = fileName;
-    } else {
-      // Sinon prend le nom du fichier depuis le chemin
-      const segments = filePath.split("/");
-      link.download = segments[segments.length - 1];
-    }
-
-    // Clique programmatique pour lancer le téléchargement
+    link.download = fileName ?? filePath.split("/").pop()!;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -26,10 +23,10 @@ export default function DownloadButton ({fileName ,filePath}:DownloadButtonProps
   return (
     <button
       onClick={handleDownload}
-      className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+      style={{ backgroundColor: color }}
+      className="px-4 py-2 text-white rounded"
     >
       Télécharger
     </button>
   );
-};
-
+}

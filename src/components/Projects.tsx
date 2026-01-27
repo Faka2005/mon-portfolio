@@ -1,5 +1,5 @@
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
-
+import '../css/projets.css';
 import { projectsData } from "../data/ProjectDataWeb";
 import { projectsIoTData } from "../data/ProjetDataIoT";
 const Projects: React.FC = () => {
@@ -41,40 +41,7 @@ const Projects: React.FC = () => {
         </Row>
       </Container>
 
-      <style>{`
-        .project-card {
-          border-radius: 12px;
-          overflow: hidden;
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .project-card:hover {
-          transform: translateY(-6px);
-          box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
-        }
-
-        .project-img-wrapper {
-          height: 220px;
-          overflow: hidden;
-        }
-
-        .project-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.4s ease;
-        }
-
-        .project-card:hover .project-img {
-          transform: scale(1.06);
-        }
-
-        .buttons-wrapper {
-          display: flex;
-          justify-content: space-between;
-          margin-top: 20px;
-        }
-      `}</style>
+    
     </section>
     <section id="projects-iot" className="bg-black text-light py-5">
       <Container>

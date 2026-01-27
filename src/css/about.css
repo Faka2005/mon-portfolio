@@ -1,0 +1,39 @@
+.skills-grid.compact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  gap: 2px; /* 🔥 EXACTEMENT 2px */
+  justify-items: center;
+}
+
+.skill-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 2px; /* très compact */
+  text-align: center;
+}
+
+.skill-card img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.skill-card span {
+  margin-top: 2px;
+  font-size: 0.65rem;
+  opacity: 0.85;
+  line-height: 1;
+}
+.skill-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.skill-card img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  margin-bottom: 6px;
+}

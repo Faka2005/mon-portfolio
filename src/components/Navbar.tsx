@@ -2,10 +2,10 @@ import React from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 const NavbarComponent: React.FC = () => {
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
+    <Navbar bg="000000" variant="dark" expand="lg" fixed="top">
       <Container>
         <Navbar.Brand href="/">
-  Bienvenue
+  Développeur junior 
 </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="navbar-nav" />
@@ -14,7 +14,7 @@ const NavbarComponent: React.FC = () => {
             <Nav.Link href="/">Acceuil</Nav.Link>
             <Nav.Link href="/#about">À Propos</Nav.Link>
             <Nav.Link href="#projects">Projets</Nav.Link>
-            <Nav.Link href="#contact">Contact</Nav.Link>
+            <Nav.Link href="/#contact">Contact</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

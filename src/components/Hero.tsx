@@ -1,36 +1,19 @@
 import React from "react";
-import { Container, Button } from "react-bootstrap";
-import Logo from "./Logo";
-const Hero: React.FC = () => {
+
+export default function Heroe() {
   return (
     <section
-      id="home"
-      className="d-flex flex-column justify-content-center align-items-center text-center"
-      style={{
-        minHeight: "100vh",
-        backgroundColor: "#000",
-        color: "#fff",
-      }}
+      id="hero"
+      className="d-flex flex-column justify-content-center align-items-center text-center bg-dark text-light"
+      style={{ height: "100vh", padding: "0 20px" }}
     >
-      <Container>
-
-
-        <h1 className="fw-bold">
-          <span className="text-primary">Développeur junior YMAMOU Yassar</span>
-        </h1>
-
-        <p className="lead">
-          Développeur junior web full-stack passionné, spécialisé en React, Node.js et MongoDB. Depuis 4 ans, je crée des applications web et mobiles performantes et ergonomiques, alliant code propre et expérience utilisateur optimale.
-        </p>
-
-        {/* 🚀 BARRE DÉFILANTE PREMIUM */}
-        <Logo />
-        <Button variant="primary" href="#projects" className="mt-4">
-          Voir mes projets
-        </Button>
-      </Container>
+      <h1 className="display-4 fw-bold mb-3">Salut, je suis YMAMOU Yassar</h1>
+      <p className="lead mb-4">
+        Étudiant en <strong>informatique & électronique</strong>, passionné par le 
+        <strong> développement web</strong> et les <strong>systèmes embarqués / IoT</strong>.
+      </p>
+      
+      
     </section>
   );
-};
-
-export default Hero;
+}
