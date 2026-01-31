@@ -40,13 +40,15 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-5 bg-dark text-light">
+    <section id="contact" className="contact-section">
       <Container style={{ maxWidth: "600px" }}>
-        <h2 className="text-center mb-4 fw-bold">Envoyez-moi un message, je serai ravi d’échanger avec vous !</h2>
-        {status === "success" && <Alert variant="success">Message envoyé !</Alert>}
-        {status === "error" && <Alert variant="danger">Erreur lors de l'envoi</Alert>}
+        <h2 className="text-center mb-3 neon-text">Vous avez un projet web ou IoT ?</h2>
+        <p className="text-center text-muted mb-4">Je réponds généralement sous 24h.</p>
 
-        <Form onSubmit={handleSubmit}>
+        {status === "success" && <Alert variant="success" className="text-center">✅ Message envoyé !</Alert>}
+        {status === "error" && <Alert variant="danger" className="text-center">❌ Erreur lors de l'envoi</Alert>}
+
+        <Form onSubmit={handleSubmit} className="contact-form">
           <Form.Group className="mb-3">
             <Form.Label>Nom</Form.Label>
             <Form.Control type="text" name="name" placeholder="Votre nom" required />
@@ -59,10 +61,10 @@ export default function Contact() {
 
           <Form.Group className="mb-3">
             <Form.Label>Message</Form.Label>
-            <Form.Control as="textarea" rows={4} name="message" placeholder="Décrivez votre projet ou posez-moi une question" required />
+            <Form.Control as="textarea" rows={5} name="message" placeholder="Décrivez votre projet ou question" required />
           </Form.Group>
 
-          <Button variant="primary" type="submit" className="w-100">
+          <Button type="submit" className="w-100 btn-neon">
             Envoyer
           </Button>
         </Form>

@@ -202,6 +202,7 @@ done
             <DownloadButton 
   filePath="/code_project/script.sh" 
   fileName="script.sh" 
+  name="Télécharger le script"
 />
 
             <h4> Code complet</h4>

@@ -1,19 +1,56 @@
 import React from "react";
+import { Container, Button } from "react-bootstrap";
+import "../css/hero.css";
 
-export default function Heroe() {
+export default function Hero() {
   return (
     <section
       id="hero"
-      className="d-flex flex-column justify-content-center align-items-center text-center bg-dark text-light"
-      style={{ height: "100vh", padding: "0 20px" }}
+      className="hero-section d-flex align-items-center"
     >
-      <h1 className="display-4 fw-bold mb-3">Salut, je suis YMAMOU Yassar</h1>
-      <p className="lead mb-4">
-        Étudiant en <strong>informatique & électronique</strong>, passionné par le 
-        <strong> développement web</strong> et les <strong>systèmes embarqués / IoT</strong>.
-      </p>
-      
-      
+      <Container className="text-center">
+
+        {/* Titre */}
+        <h1 className="hero-title mb-3">
+          Développeur Web & IoT junior
+        </h1>
+
+        {/* Sous-titre */}
+        <p className="hero-subtitle mb-2">
+          Applications web modernes & systèmes connectés.
+        </p>
+
+        {/* Stage / Missions (bien visible) */}
+        <p className="hero-highlight mb-4">
+          À la recherche d’un stage — ouvert aux missions projets
+        </p>
+
+        {/* Stack */}
+        <p className="hero-stack mb-4">
+          React • TypeScript • Node.js • Arduino • ESP32 • IoT
+        </p>
+
+        {/* CTA */}
+        <div className="d-flex justify-content-center gap-3">
+          <Button href="#projects" className="btn-neon" size="lg">
+            Voir mes projets
+          </Button>
+
+          <Button
+            href="#contact"
+            className="btn-outline-neon"
+            size="lg"
+          >
+            Me contacter
+          </Button>
+        </div>
+
+        {/* Nom discret */}
+        <p className="hero-name mt-5">
+          YMAMOU Yassar — Informatique & Électronique
+        </p>
+
+      </Container>
     </section>
   );
 }

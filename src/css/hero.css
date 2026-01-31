@@ -1,0 +1,80 @@
+/* ---------- VARIABLES ---------- */
+:root {
+  --bg-main: #0b0f1a;
+  --bg-alt: #11162a;
+
+  --text-main: #e6e6eb;
+  --text-muted: #9aa0b3;
+
+  --neon-primary: #00f7ff;
+  --neon-secondary: #7c7cff;
+}
+
+/* ---------- HERO SECTION ---------- */
+.hero-section {
+  min-height: 100vh;
+  background: radial-gradient(
+    circle at top,
+    #11162a,
+    var(--bg-main)
+  );
+  color: var(--text-main);
+}
+
+/* ---------- TEXT ---------- */
+.hero-title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 700;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+}
+
+.hero-highlight {
+  font-size: 1.1rem;
+  color: var(--neon-primary);
+  text-shadow: 0 0 8px rgba(0, 247, 255, 0.5);
+}
+
+.hero-stack {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+.hero-name {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ---------- BUTTONS ---------- */
+.btn-neon {
+  background-color: var(--neon-primary);
+  color: #000;
+  border: none;
+  font-weight: 500;
+  padding: 0.6rem 1.6rem;
+  transition: all 0.3s ease;
+}
+
+.btn-neon:hover {
+  background-color: #00cfd6;
+  box-shadow: 0 0 16px rgba(0, 247, 255, 0.7);
+  transform: translateY(-2px);
+}
+
+.btn-outline-neon {
+  background: transparent;
+  color: var(--neon-primary);
+  border: 1px solid var(--neon-primary);
+  padding: 0.6rem 1.6rem;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-neon:hover {
+  background-color: rgba(0, 247, 255, 0.1);
+  box-shadow: 0 0 14px rgba(0, 247, 255, 0.6);
+  transform: translateY(-2px);
+}

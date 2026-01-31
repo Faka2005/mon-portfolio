@@ -1,7 +1,8 @@
 type DownloadButtonProps = {
   filePath: string;
   fileName: string;
-  color : "red" | "blue" | "green";
+  color? : "red" | "blue" | "green";
+  name:string;
 };
 
 
@@ -10,6 +11,7 @@ export default function DownloadButton({
   fileName,
   filePath,
   color = "blue",
+  name
 }: DownloadButtonProps) {
   const handleDownload = () => {
     const link = document.createElement("a");
@@ -26,7 +28,7 @@ export default function DownloadButton({
       style={{ backgroundColor: color }}
       className="px-4 py-2 text-white rounded"
     >
-      Télécharger
+      {name}
     </button>
   );
 }
